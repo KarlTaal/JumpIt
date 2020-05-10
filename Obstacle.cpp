@@ -4,15 +4,21 @@
 #include "Game.h"
 #include "endscore.h"
 #include "replaybutton.h"
-
-#include <QDebug>
+#include <stdlib.h>
 
 extern Game* game;
 
-Obstacle::Obstacle(int random)
+Obstacle::Obstacle()
 {
-    width = 30 + random * 30;
-    setRect(0,0,width, 50);
+    int random = rand() % 3;
+    width = 60 + random * 27;
+
+    QPixmap pm = QPixmap(":/images/vacuum.png");
+    pm = pm.scaled(width, 50);
+    setPixmap(pm);
+
+
+
     //Connect with timer for moving obstacles
     timer = new QTimer();
     timer->start(5);
@@ -45,7 +51,7 @@ void Obstacle::move()
     }
 
     setPos(x() - 1, y());
-    if (pos().x() < 100){
+    if (pos().x() < 0 - width){
         scene()->removeItem(this);
         delete this;
     }

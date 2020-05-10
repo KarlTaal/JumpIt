@@ -1,13 +1,15 @@
 #include "replaybutton.h"
-#include <QDebug>
 #include "Game.h"
 #include <QGraphicsProxyWidget>
+
+#include <vector>
+
 extern Game* game;
 
 ReplayButton::ReplayButton()
 {
-    setGeometry(QRect(QPoint(250, 400),QSize(200, 50)));
-    setText("Replay");
+    setGeometry(QRect(QPoint(1150 / 2 - 100, 200),QSize(200, 50)));
+    setText("Play again");
     QObject::connect(this, SIGNAL(clicked()), this, SLOT(replay()));
 }
 
@@ -17,7 +19,7 @@ void ReplayButton::replay()
   Player* p = new Player();
   game->player = p;
   game->scene->addItem(p);
-  p->setPos(400, 500);
+  p->setPos(400, 410);
   p->setFlag(QGraphicsItem::ItemIsFocusable);
   p->setFocus();
 
@@ -26,6 +28,11 @@ void ReplayButton::replay()
   game->scene->addItem(s);
   game->score = s;
 
+  EndScore* ptr1 = game->endscore;
+
   game->scene->removeItem(graphicsProxyWidget());
   game->scene->removeItem(game->endscore);
+
+  delete ptr1;
+  deleteLater();
 }

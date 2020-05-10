@@ -1,12 +1,12 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 
-class Obstacle:public QObject, public QGraphicsRectItem{
+class Obstacle:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    Obstacle(int random);
+    Obstacle();
     ~Obstacle();
     QTimer* timer;
     bool passed;

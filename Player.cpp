@@ -2,10 +2,12 @@
 #include <QKeyEvent>
 #include <QTimer>
 #include <QGraphicsScene>
-#include <stdlib.h>
+
 
 Player::Player(){
-    setRect(0, 0, 50, 50);
+    QPixmap pm = QPixmap(":/images/pipo.png");
+    pm = pm.scaled(75, 75);
+    setPixmap(pm);
 
     //Connect with timer for jumping
     timer = new QTimer();
@@ -40,7 +42,7 @@ void Player::keyPressEvent(QKeyEvent *event)
 void Player::jump()
 {
     int speed = 10;
-    int maxHeight = 20;
+    int maxHeight = 21;
 
     if (m_jumperHelper == maxHeight)
         m_goingUp = false;
@@ -62,9 +64,8 @@ void Player::jump()
 
 void Player::addObstacle()
 {
-    int random_number = rand() % 3;
-    Obstacle* obs = new Obstacle(random_number);
-    obs->setPos(1200, 500);
+    Obstacle* obs = new Obstacle();
+    obs->setPos(1200, 435);
     scene()->addItem(obs);
 }
 
