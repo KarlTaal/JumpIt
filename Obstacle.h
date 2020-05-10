@@ -6,9 +6,12 @@
 class Obstacle:public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
-    Obstacle();
+    Obstacle(int random);
     ~Obstacle();
     QTimer* timer;
+    bool passed;
+    int width;
+
 
 public slots:
     void move();

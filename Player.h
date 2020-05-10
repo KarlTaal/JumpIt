@@ -3,7 +3,6 @@
 
 #include <QGraphicsRectItem>
 #include <QObject>
-#include <vector>
 #include "Obstacle.h"
 
 class Player: public QObject, public QGraphicsRectItem{
@@ -15,10 +14,8 @@ public:
     bool m_isJumping;
     bool m_goingUp;
     int m_jumperHelper;
-    std::vector<Obstacle*> m_obstacles;
-    QTimer* timer1;
+    QTimer* timer;
     QTimer* timer2;
-
 
 
 public slots:

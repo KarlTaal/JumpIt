@@ -2,19 +2,19 @@
 #include <QKeyEvent>
 #include <QTimer>
 #include <QGraphicsScene>
+#include <stdlib.h>
 
 Player::Player(){
     setRect(0, 0, 50, 50);
 
     //Connect with timer for jumping
-    timer1 = new QTimer();
-    timer1->start(25);
-    connect(timer1, SIGNAL(timeout()), this, SLOT(jump()));
+    timer = new QTimer();
+    timer->start(25);
+    connect(timer, SIGNAL(timeout()), this, SLOT(jump()));
 
-    //Connect with timer for adding obstacles
     timer2 = new QTimer();
-    timer2->start(3000);
-    connect(timer2, SIGNAL(timeout()), this, SLOT(addObstacle()));
+    QObject::connect(timer2, SIGNAL(timeout()), this, SLOT(addObstacle()));
+    timer2->start(2000);
 
     m_isJumping = false;
     m_goingUp = false;
@@ -22,10 +22,7 @@ Player::Player(){
 }
 
 Player::~Player(){
-    for(unsigned int i = 0; i < m_obstacles.size(); i++){
-       delete m_obstacles[i];
-    }
-    delete timer1;
+    delete timer;
     delete timer2;
 }
 
@@ -62,18 +59,13 @@ void Player::jump()
     }
 }
 
-/*void Player::moveObstacles()
-{
-    for(unsigned int i = 0; i < m_obstacles.size(); i++){
-        m_obstacles[i]->setPos(m_obstacles[i]->x() - 1, m_obstacles[i]->y());
-    }
-}*/
 
 void Player::addObstacle()
 {
-    Obstacle* obs = new Obstacle();
+    int random_number = rand() % 3;
+    Obstacle* obs = new Obstacle(random_number);
     obs->setPos(1200, 500);
     scene()->addItem(obs);
-    //m_obstacles.push_back(obs);
 }
+
 

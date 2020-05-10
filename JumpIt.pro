@@ -16,13 +16,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    EndScore.cpp \
+    Game.cpp \
     Obstacle.cpp \
     Player.cpp \
-    main.cpp
+    Score.cpp \
+    endscore.cpp \
+    main.cpp \
+    replaybutton.cpp
 
 HEADERS += \
+    Game.h \
     Obstacle.h \
-    Player.h
+    Player.h \
+    Score.h \
+    endscore.h \
+    replaybutton.h
 
 FORMS +=
 
